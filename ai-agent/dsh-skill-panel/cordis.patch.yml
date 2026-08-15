@@ -1,0 +1,4 @@
+# Skills Panel plugin: adds a browsable skills panel to the sidebar.
+- insert:
+    - id: dsh-skill-panel
+      name: 'dsh-skill-panel'

@@ -1,0 +1,44 @@
+{
+  "name": "dsh-restart-web",
+  "version": "0.1.0",
+  "private": true,
+  "description": "在设置页提供一个「重启 Web 服务」按钮：浏览器按钮 → POST /api/restart-web → host 端调用 launcher 提供的 appExit 优雅退出；进程由外部监督者（容器 restart 策略 / systemd / pm2 等）拉起后新插件生效",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": {
+      "default": "./lib/index.js"
+    },
+    "./client": {
+      "default": "./lib/client.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "test-client.js"
+  ],
+  "scripts": {
+    "test": "node test-client.js"
+  },
+  "dsh": {
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-runtime",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web",
+      "immediately": true
+    }
+  },
+  "peerDependencies": {
+    "react": "^18.2.0"
+  },
+  "license": "MIT"
+}

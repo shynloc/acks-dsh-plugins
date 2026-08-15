@@ -1,0 +1,4 @@
+# Add the reversible browser-only Jintao retro theme to the profile graph.
+- insert:
+    - id: theme-jintao-retro
+      name: 'dsh-theme-jintao-retro'

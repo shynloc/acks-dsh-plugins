@@ -1,0 +1,5 @@
+# dsh-imagegen bundle patch: register the plugin row for the profile layer
+# stack. Applied as part of the dsh-imagegen bundle (see package.json dsh.bundle).
+- insert:
+    - id: dsh-imagegen
+      name: 'dsh-imagegen'

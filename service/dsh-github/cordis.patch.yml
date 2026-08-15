@@ -1,0 +1,4 @@
+# GitHub plugin: registers github_* tools and a settings card.
+- insert:
+    - id: dsh-github
+      name: 'dsh-github'

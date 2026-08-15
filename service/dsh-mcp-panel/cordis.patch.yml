@@ -1,0 +1,4 @@
+# MCP servers panel plugin: adds a MCP configuration section to Settings.
+- insert:
+    - id: dsh-mcp-panel
+      name: 'dsh-mcp-panel'

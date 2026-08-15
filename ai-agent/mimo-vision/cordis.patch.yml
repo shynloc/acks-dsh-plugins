@@ -1,0 +1,5 @@
+# mimo-vision bundle patch: register the plugin row for the profile layer
+# stack. Applied as part of the mimo-vision bundle (see package.json dsh.bundle).
+- insert:
+    - id: mimo-vision
+      name: 'mimo-vision'

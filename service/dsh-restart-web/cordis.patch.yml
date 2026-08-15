@@ -1,0 +1,8 @@
+# dsh-restart-web bundle patch: register the plugin row for the profile layer
+# stack. Applied as part of the dsh-restart-web bundle (see package.json
+# dsh.bundle.patch). The row is a dsh.client dual-face package: host half
+# (lib/index.js) owns the POST /api/restart-web route; browser half
+# (exports["./client"]) renders the settings button.
+- insert:
+    - id: restart-web
+      name: 'dsh-restart-web'

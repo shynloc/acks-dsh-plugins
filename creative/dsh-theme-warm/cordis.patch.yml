@@ -1,0 +1,8 @@
+# dsh-theme-warm bundle patch: register the plugin row for the profile layer
+# stack. Applied as part of the dsh-theme-warm bundle (see package.json
+# dsh.bundle.patch). The row is a dsh.client dual-face package: its node half
+# (lib/index.js) is empty, and its browser half (exports["./client"]) is picked
+# up by dsh-client-modules' incremental scan and served at /plugins/<id>/client.js.
+- insert:
+    - id: theme-warm
+      name: 'dsh-theme-warm'

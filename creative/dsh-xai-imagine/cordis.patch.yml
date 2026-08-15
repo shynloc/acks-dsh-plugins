@@ -1,0 +1,4 @@
+# Register the xAI Grok Imagine plugin in the profile layer stack.
+- insert:
+    - id: dsh-xai-imagine
+      name: 'dsh-xai-imagine'
