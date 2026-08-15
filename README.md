@@ -178,4 +178,4 @@ acks-dsh-plugins/
 
 ## 📝 License
 
-MIT © [ACKS STUIO](https://jintaoblog.com)
+MIT © [ACKS STUIO](https://acks.com.cn)
