@@ -19,6 +19,7 @@ const API_PREFIX = "/api/mcp-panel";
 const MCP_CLIENT_NAME = "@deepseek-ai/dsh-mcp-client";
 const BEGIN_MARKER = "# === BEGIN MCP SERVERS (managed by dsh-mcp-panel) ===";
 const END_MARKER = "# === END MCP SERVERS ===";
+const MAX_BODY_BYTES = 256 * 1024;
 
 const FIBER_STATE = { PENDING: 0, LOADING: 1, ACTIVE: 2, FAILED: 3, DISPOSED: 4, UNLOADING: 5 };
 const SERVER_NAME_PATTERN = /^[A-Za-z0-9_-]{1,32}$/;
@@ -175,14 +176,33 @@ function json(res, status, body) {
     "content-type": "application/json; charset=utf-8",
     "content-length": Buffer.byteLength(payload),
     "cache-control": "no-store",
-    "access-control-allow-origin": "*"
+    "x-content-type-options": "nosniff"
   });
   res.end(payload);
 }
 
+function isSameOrigin(req) {
+  const site = req.headers["sec-fetch-site"];
+  if (typeof site === "string") return site === "same-origin" || site === "none";
+  const origin = req.headers.origin;
+  if (origin === undefined) return true;
+  const host = req.headers.host;
+  if (host === undefined) return false;
+  try {
+    return new URL(origin).host === host;
+  } catch {
+    return false;
+  }
+}
+
 async function readBody(req) {
   const chunks = [];
-  for await (const chunk of req) chunks.push(chunk);
+  let total = 0;
+  for await (const chunk of req) {
+    total += chunk.length;
+    if (total > MAX_BODY_BYTES) throw new Error("request body too large");
+    chunks.push(chunk);
+  }
   const text = Buffer.concat(chunks).toString("utf8");
   if (!text) return {};
   try {
@@ -198,13 +218,8 @@ function apply(ctx) {
       kind: "prefix",
       path: API_PREFIX,
       async handler(req, res) {
-        if (req.method === "OPTIONS") {
-          res.writeHead(204, {
-            "access-control-allow-origin": "*",
-            "access-control-allow-methods": "GET, POST, PUT, DELETE, OPTIONS",
-            "access-control-allow-headers": "content-type"
-          });
-          res.end();
+        if (["POST", "PUT", "DELETE"].includes(req.method) && !isSameOrigin(req)) {
+          json(res, 403, { ok: false, error: "cross-origin request rejected" });
           return;
         }
 
@@ -277,7 +292,9 @@ function apply(ctx) {
           json(res, 404, { ok: false, error: "not found" });
         } catch (error) {
           ctx.logger?.warn?.(`mcp-panel API error: ${error.message}`);
-          const status = error.message === "invalid JSON body" ? 400 : 500;
+          const status = error.message === "invalid JSON body"
+            ? 400
+            : error.message === "request body too large" ? 413 : 500;
           json(res, status, { ok: false, error: error.message });
         }
       }
@@ -285,4 +302,4 @@ function apply(ctx) {
   });
 }
 
-export { apply, inject, name };
+export { apply, inject, isSameOrigin, name };

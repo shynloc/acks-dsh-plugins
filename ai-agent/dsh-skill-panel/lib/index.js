@@ -18,7 +18,7 @@ function jsonResponse(res, status, body) {
     "content-type": "application/json; charset=utf-8",
     "content-length": Buffer.byteLength(payload),
     "cache-control": "no-store",
-    "access-control-allow-origin": "*",
+    "x-content-type-options": "nosniff",
   });
   res.end(payload);
 }
@@ -29,17 +29,6 @@ function apply(ctx) {
       kind: "prefix",
       path: API_PREFIX,
       async handler(req, res) {
-        // CORS preflight
-        if (req.method === "OPTIONS") {
-          res.writeHead(204, {
-            "access-control-allow-origin": "*",
-            "access-control-allow-methods": "GET, OPTIONS",
-            "access-control-allow-headers": "content-type",
-          });
-          res.end();
-          return;
-        }
-
         if (req.method !== "GET") {
           jsonResponse(res, 405, { error: "Method not allowed" });
           return;
