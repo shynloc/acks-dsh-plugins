@@ -94,6 +94,7 @@ window.__ModuleLoader__.load({
       ctx.slots.inject("settings.plugin.item", function () {
         return ctx.slots.register({
           name: "settings.plugin.item",
+          key: "dsh-github",
           id: "dsh-github",
           order: 33,
           inject: function () { return { describeCredential: describeCredential, setToken: setToken, unsetToken: unsetToken, setDefaultRepo: setDefaultRepo, unsetDefaultRepo: unsetDefaultRepo }; }

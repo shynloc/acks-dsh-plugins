@@ -254,6 +254,7 @@ window.__ModuleLoader__.load({
       ctx.slots.inject("settings.plugin.item", function () {
         return ctx.slots.register({
           name: "settings.plugin.item",
+          key: "mimo-vision",
           id: "mimo-vision",
           order: 30,
           inject: function () {

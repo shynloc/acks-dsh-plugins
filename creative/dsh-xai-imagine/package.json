@@ -1,6 +1,6 @@
 {
   "name": "dsh-xai-imagine",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "DeepSeek Harness xAI Grok Imagine Image 2.0 plugin with generation and editing tools",
   "type": "module",

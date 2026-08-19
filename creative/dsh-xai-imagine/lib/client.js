@@ -54,7 +54,7 @@ window.__ModuleLoader__.load({
       function describeCredential() { return api.credentials.describe({ refs: [API_KEY_REF] }).then(function (response) { if (!response.result.ok) throw new Error(messageOf(response, "凭据状态读取失败")); var value = (response.result.value.credentials || {})[API_KEY_REF]; return { configured: Boolean(value && value.configured), writable: value ? value.writable === true : true }; }); }
       function setCredential(value) { return api.credentials.set({ ref: API_KEY_REF, value: value }).then(function (response) { if (!response.result.ok) throw new Error(messageOf(response, "凭据写入被拒绝")); }); }
       function unsetCredential() { return api.credentials.unset({ ref: API_KEY_REF }).then(function (response) { if (!response.result.ok) throw new Error(messageOf(response, "凭据清除被拒绝")); }); }
-      ctx.slots.inject("settings.plugin.item", function () { return ctx.slots.register({ name: "settings.plugin.item", id: "dsh-xai-imagine", order: 32, inject: function () { return { describeCredential: describeCredential, setCredential: setCredential, unsetCredential: unsetCredential }; } }, Card); });
+      ctx.slots.inject("settings.plugin.item", function () { return ctx.slots.register({ name: "settings.plugin.item", key: "dsh-xai-imagine", id: "dsh-xai-imagine", order: 32, inject: function () { return { describeCredential: describeCredential, setCredential: setCredential, unsetCredential: unsetCredential }; } }, Card); });
     }
     exports.apply = apply;
     exports.inject = ["slots", "connection"];

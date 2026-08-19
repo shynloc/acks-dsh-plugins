@@ -1,6 +1,6 @@
 {
   "name": "mimo-vision",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "private": true,
   "description": "MiMo multimodal understanding for DeepSeek Harness with workspace confinement and pay-as-you-go/Token Plan Base URL support",
   "type": "module",

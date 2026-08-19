@@ -1,6 +1,6 @@
 {
   "name": "dsh-imagegen",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "DeepSeek Harness 生图插件：注册 generate_image 工具，调用 OpenAI Images API（默认 gpt-image-2）生成图片，写入工作区并可在图像模型对话中显示；附带设置卡片（API Key / Base URL）",
   "type": "module",

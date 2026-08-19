@@ -245,6 +245,7 @@ window.__ModuleLoader__.load({
       ctx.slots.inject("settings.plugin.item", function () {
         return ctx.slots.register({
           name: "settings.plugin.item",
+          key: "dsh-imagegen",
           id: "dsh-imagegen",
           order: 31,
           inject: function () {

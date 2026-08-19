@@ -1,6 +1,6 @@
 {
   "name": "dsh-github",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "GitHub plugin for DeepSeek Harness - comprehensive GitHub REST API tools (repos, issues, PRs, files, releases, search)",
   "type": "module",
