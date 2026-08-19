@@ -224,7 +224,7 @@ window.__ModuleLoader__.load({
 
     // ── Plugin Entry ──────────────────────────────────────────────────────
     function apply(ctx) {
-      ctx.effect(function() {
+      ctx.slots.inject("settings.section", function() {
         return ctx.slots.register({
           name: "settings.section",
           id: "mcp",
@@ -232,7 +232,7 @@ window.__ModuleLoader__.load({
           label: function() { return "MCP"; },
           inject: function() { return {}; }
         }, McpSection);
-      }, "dsh-mcp-panel: settings section");
+      });
     }
 
     exports.apply = apply;

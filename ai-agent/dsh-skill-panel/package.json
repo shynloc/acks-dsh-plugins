@@ -1,6 +1,6 @@
 {
   "name": "dsh-skill-panel",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "description": "Skills panel plugin for DeepSeek Harness - browse and discover installed skills",
   "type": "module",
