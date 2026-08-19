@@ -14,6 +14,7 @@
  */
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import { credentialRef } from "@deepseek-ai/dsh-credentials";
+import Schema from "@deepseek-ai/schemastery";
 import { readFile, realpath, stat } from "node:fs/promises";
 import { isAbsolute, relative, resolve, sep } from "node:path";
 
@@ -359,6 +360,10 @@ async function runUnderstanding(ctx, args, exec) {
 
 /** Plugin entry: register the two tools. */
 function apply(ctx) {
+  ctx.inject(["settings"], function (settingsCtx) {
+    settingsCtx.settings.register("mimo-vision", Schema.object({}));
+  });
+
   ctx.tools.register(
     defineTool({
       name: "analyze_image",

@@ -9,6 +9,7 @@
  */
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import { credentialRef } from "@deepseek-ai/dsh-credentials";
+import Schema from "@deepseek-ai/schemastery";
 
 const name = "dsh-github";
 const inject = ["tools", "credentials"];
@@ -124,6 +125,10 @@ function repoParams(extra = {}) {
 // ── plugin ────────────────────────────────────────────────────────────────
 
 async function apply(ctx) {
+  ctx.inject(["settings"], function (settingsCtx) {
+    settingsCtx.settings.register("dsh-github", Schema.object({}));
+  });
+
   // ── repositories ─────────────────────────────────────────────────────────
   registerGhTool(ctx, {
     name: "github_create_repository",

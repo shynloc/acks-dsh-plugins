@@ -21,6 +21,7 @@
  */
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import { credentialRef } from "@deepseek-ai/dsh-credentials";
+import Schema from "@deepseek-ai/schemastery";
 import { AttachmentId } from "@deepseek-ai/dsh-attachment";
 import { createUserMessage } from "@deepseek-ai/dsh-llm";
 import { mkdir, realpath, writeFile } from "node:fs/promises";
@@ -526,6 +527,10 @@ async function runGeneration(ctx, args, exec) {
 
 /** Plugin entry: register the `generate_image` tool. */
 function apply(ctx) {
+  ctx.inject(["settings"], function (settingsCtx) {
+    settingsCtx.settings.register("dsh-imagegen", Schema.object({}));
+  });
+
   ctx.tools.register(
     defineTool({
       name: "generate_image",

@@ -6,6 +6,7 @@
  */
 import { defineTool } from "@deepseek-ai/dsh-tools";
 import { credentialRef } from "@deepseek-ai/dsh-credentials";
+import Schema from "@deepseek-ai/schemastery";
 import { AttachmentId } from "@deepseek-ai/dsh-attachment";
 import { createUserMessage } from "@deepseek-ai/dsh-llm";
 import { randomBytes } from "node:crypto";
@@ -248,6 +249,10 @@ function generationPayload(args) {
 }
 
 function apply(ctx) {
+  ctx.inject(["settings"], function (settingsCtx) {
+    settingsCtx.settings.register("dsh-xai-imagine", Schema.object({}));
+  });
+
   const previews = new Map();
   ctx.inject(["webServer"], (httpCtx) => {
     httpCtx.effect(() => httpCtx.webServer.register({
