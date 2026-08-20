@@ -44,6 +44,16 @@ ln -sf /usr/local/lib/node_modules/@deepseek-ai/dsh/node_modules/@deepseek-ai/ds
 | `GITHUB_TOKEN` | GitHub Personal Access Token |
 | `GITHUB_DEFAULT_REPO` | 默认仓库，格式 `owner/repo`（可选） |
 
+## 故障诊断
+
+- `0.1.2` 修复了仓库级工具未等待异步请求构造器的问题。旧版本会把
+  `Promise` 当成请求描述，最终访问错误的 `api.github.comundefined` 主机，
+  因而只显示笼统的 `fetch failed`。
+- 新版本会保留安全的网络故障类型（例如 DNS 主机名解析或连接超时），但
+  不会把 Token 写入错误信息。
+- HTTP 401/403/404 和限流响应仍按 GitHub API 状态码返回，便于区分 Token、
+  权限、仓库可见性与传输层问题。
+
 ## 目录结构
 
 ```

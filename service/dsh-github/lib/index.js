@@ -16,6 +16,7 @@ const inject = ["tools", "credentials"];
 
 const API_ROOT = "https://api.github.com";
 const API_VERSION = "2022-11-28";
+const USER_AGENT = "dsh-github/0.1.2";
 const TOKEN_REF = credentialRef("GITHUB_TOKEN");
 const DEFAULT_REPO_REF = credentialRef("GITHUB_DEFAULT_REPO");
 const API_TIMEOUT_MS = 60_000;
@@ -56,15 +57,30 @@ async function ghRequest(ctx, method, path, body, signal) {
   const headers = {
     Accept: "application/vnd.github+json",
     "X-GitHub-Api-Version": API_VERSION,
+    "User-Agent": USER_AGENT,
     Authorization: `Bearer ${token}`,
   };
   if (body !== undefined) headers["Content-Type"] = "application/json";
-  const response = await fetch(`${API_ROOT}${path}`, {
-    method,
-    headers,
-    body: body !== undefined ? JSON.stringify(body) : undefined,
-    signal: requestSignal(signal),
-  });
+  let response;
+  try {
+    response = await fetch(`${API_ROOT}${path}`, {
+      method,
+      headers,
+      body: body !== undefined ? JSON.stringify(body) : undefined,
+      signal: requestSignal(signal),
+    });
+  } catch (error) {
+    if (signal?.aborted) throw error;
+    const cause = error?.cause;
+    const code = typeof cause?.code === "string" ? cause.code : "";
+    const hostname = typeof cause?.hostname === "string" ? cause.hostname : "";
+    const details = [code, hostname].filter(Boolean).join(" · ");
+    const timeout = error?.name === "TimeoutError" || code === "UND_ERR_CONNECT_TIMEOUT";
+    throw new Error(
+      `GitHub ${timeout ? "请求超时" : "网络请求失败"}${details ? ` (${details})` : ""}`,
+      { cause: error },
+    );
+  }
   const text = await response.text();
   let data;
   try {
@@ -105,7 +121,7 @@ function registerGhTool(ctx, { name, description, parameters, build }) {
     parameters,
     output: { schema: GH_OUTPUT_SCHEMA, render: renderJson },
     async execute(args, exec) {
-      const { method, path, body, transform } = build(args);
+      const { method, path, body, transform } = await build(args);
       const result = await ghRequest(ctx, method, path, body, exec.signal);
       return transform ? transform(result) : result;
     },
