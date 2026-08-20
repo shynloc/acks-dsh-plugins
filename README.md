@@ -3,13 +3,13 @@
 > 一套开箱即用的 [DeepSeek Harness](https://github.com/deepseek-ai/deepseek-harness) 插件合集，覆盖 AI Agent 能力扩展、创意视觉、知识管理与服务集成。
 
 <p align="center">
-  <img src="https://img.shields.io/badge/plugins-9-blue?style=for-the-badge" alt="plugins">
+  <img src="https://img.shields.io/badge/plugins-20-blue?style=for-the-badge" alt="plugins">
   <img src="https://img.shields.io/badge/platform-DeepSeek%20Harness-4a6cf7?style=for-the-badge" alt="platform">
   <img src="https://img.shields.io/badge/license-MIT-green?style=for-the-badge" alt="license">
   <img src="https://img.shields.io/badge/AI%20Agent-2-8b5cf6?style=for-the-badge" alt="ai-agent">
-  <img src="https://img.shields.io/badge/Creative-4-f97316?style=for-the-badge" alt="creative">
-  <img src="https://img.shields.io/badge/Knowledge-0-6b7280?style=for-the-badge" alt="knowledge">
-  <img src="https://img.shields.io/badge/Service-3-10b981?style=for-the-badge" alt="service">
+  <img src="https://img.shields.io/badge/Creative-6-f97316?style=for-the-badge" alt="creative">
+  <img src="https://img.shields.io/badge/Knowledge-7-3b82f6?style=for-the-badge" alt="knowledge">
+  <img src="https://img.shields.io/badge/Service-5-10b981?style=for-the-badge" alt="service">
 </p>
 
 ---
@@ -18,11 +18,11 @@
 
 | 指标 | 数量 |
 |------|:----:|
-| **插件总数** | **9** |
+| **插件总数** | **20** |
 | ├─ 🤖 AI Agent | 2 |
-| ├─ 🎨 Creative | 4 |
-| ├─ 📚 Knowledge | 0 |
-| └─ 🔧 Service | 3 |
+| ├─ 🎨 Creative | 6 |
+| ├─ 📚 Knowledge | 7 |
+| └─ 🔧 Service | 5 |
 
 ---
 
@@ -31,9 +31,9 @@
 | 分类 | 图标 | 说明 | 目录 |
 |------|:----:|------|------|
 | **AI Agent** | 🤖 | 与 agent 开发、AI 模型使用相关的插件（模型接入、视觉理解、工具集等） | [`ai-agent/`](ai-agent/) |
-| **Creative** | 🎨 | 与创意、视觉、内容创作相关的插件（生图、编辑、主题等） | [`creative/`](creative/) |
+| **Creative** | 🎨 | 与创意、视觉、内容创作相关的插件（生图、编辑、主题、卡片等） | [`creative/`](creative/) |
 | **Knowledge** | 📚 | 与知识库、信息管理、任务/项目管理相关的插件 | [`knowledge/`](knowledge/) |
-| **Service** | 🔧 | 与服务相关的插件（网站构建、服务器远程、外部服务集成等） | [`service/`](service/) |
+| **Service** | 🔧 | 与服务相关的插件（文件管理、GitHub、视频、MCP 管理等） | [`service/`](service/) |
 
 ---
 
@@ -86,6 +86,64 @@ Native 组件的复古掌机硬件皮肤，在不修改上游 DSH 包的前提�
 
 - **特性**：独立栅格资源、凸起/按下状态、原生可点击节点保留
 
+#### [dsh-card-printer](creative/dsh-card-printer/) — 离线卡片工作室
+
+原生离线卡片设计工具，支持有界文本卡片、有限调色板、SVG 预览和本地 Canvas 导出。无远程资源、无模型调用、无网络请求。
+
+- **特性**：纯本地运行、SVG 矢量预览、Canvas PNG 导出
+
+#### [dsh-watermarker](creative/dsh-watermarker/) — 浏览器本地水印工具
+
+浏览器本地栅格水印工具，图片不离开浏览器，仅数字和文本预设会持久化。
+
+- **特性**：图片不上传、纯本地处理、支持文字/数字水印预设
+
+---
+
+### 📚 Knowledge
+
+#### [dsh-notebook](knowledge/dsh-notebook/) — 笔记本
+
+原生笔记本插件，支持 Markdown 编辑/预览、对话捕获、AI 上下文传递、分类管理、版本历史、全文搜索和模板。
+
+- **特性**：SVG 原生控件、对话一键存入笔记本、编辑/分屏/预览三模式、版本历史（最多 50 快照）
+
+#### [dsh-agenda](knowledge/dsh-agenda/) — 议程管理
+
+原生日程模块：日历视图、任务管理、回顾和可逆归档，覆盖完整的任务生命周期。
+
+- **特性**：日历 + 任务双视图、可逆归档、标签过滤
+
+#### [dsh-projects](knowledge/dsh-projects/) — 项目管理
+
+原生项目工作区：权威的、版本感知的项目记录，支持阶段、日期、标签和可逆归档。
+
+- **特性**：项目阶段管理、日期追踪、标签系统
+
+#### [dsh-areas](knowledge/dsh-areas/) — 领域管理
+
+原生领域工作区：针对持续性职责的权威版本感知记录。
+
+- **特性**：领域/职责分区、关联引用
+
+#### [dsh-resources](knowledge/dsh-resources/) — 资源管理
+
+原生资源工作区：权威的版本感知记录，用于可复用的策划资产或主题，通过 id 引用而不会被拉取。
+
+- **特性**：资源策展、id 引用机制
+
+#### [dsh-bookmarks](knowledge/dsh-bookmarks/) — 书签管理
+
+原生书签管理器：标题、HTTP(S) URL、备注、标签、阅读状态、搜索和可逆归档。只存链接，不抓取内容。
+
+- **特性**：标签分类、阅读状态追踪、全文搜索
+
+#### [dsh-knowledge-archives](knowledge/dsh-knowledge-archives/) — 知识归档
+
+统一归档投影：对所有拥有归档记录的领域的只读聚合，通过各领域自己的端点恢复。无独立存储，无归档权限。
+
+- **特性**：跨领域统一归档视图、通过原属端点恢复
+
 ---
 
 ### 🔧 Service
@@ -109,6 +167,19 @@ Native 组件的复古掌机硬件皮肤，在不修改上游 DSH 包的前提�
 在设置页（通用）提供「重启 Web 服务」按钮，两步确认后优雅退出进程树，由外部监督者（容器 / systemd / pm2）拉起后新插件生效。
 
 - **场景**：安装插件后无需命令行即可重启生效
+
+#### [dsh-video](service/dsh-video/) — 视频内嵌播放
+
+在对话中内嵌可播放/可下载的 MP4/WebM 视频文件。
+
+- **特性**：inline 播放、路径安全校验、200 MiB 大小限制
+
+#### [dsh-file-drawer](service/dsh-file-drawer/) — 文件管理面板抽屉
+
+在 DSH 顶部导航栏添加「📂 文件」按钮，点击后从右侧滑出文件管理面板。通过 iframe 嵌入，需要自行部署文件面板服务。
+
+- **特性**：抽屉式面板、导航栏按钮、快捷键关闭、iframe 沙箱隔离
+- **配置**：详见 [插件 README](service/dsh-file-drawer/README.md)（含反向代理/端口/域名配置教程）
 
 ---
 
@@ -155,23 +226,44 @@ dsh plugin --profile web add ./acks-dsh-plugins/service/dsh-github
 
 ---
 
+## 📝 更新日志
+
+### 2026-08-20
+
+- 🆕 新增 11 个插件：`dsh-agenda`、`dsh-areas`、`dsh-bookmarks`、`dsh-card-printer`、`dsh-file-drawer`、`dsh-knowledge-archives`、`dsh-notebook`、`dsh-projects`、`dsh-resources`、`dsh-video`、`dsh-watermarker`
+- 📦 更新全部 9 个已有插件到最新版本
+- 📚 Knowledge 分类从 0 扩充到 7 个插件
+
+---
+
 ## 📄 目录结构
 
 ```
 acks-dsh-plugins/
 ├── ai-agent/
-│   ├── mimo-vision/          # 视觉理解 / OCR / 视频理解
-│   └── dsh-skill-panel/      # Skills 面板
+│   ├── mimo-vision/              # 视觉理解 / OCR / 视频理解
+│   └── dsh-skill-panel/          # Skills 面板
 ├── creative/
-│   ├── dsh-imagegen/         # 生图（OpenAI Images）
-│   ├── dsh-xai-imagine/      # xAI 生图 / 编辑
-│   ├── dsh-theme-warm/       # 暖色护眼主题
-│   └── dsh-theme-jintao-retro/ # 复古硬件皮肤主题
-├── knowledge/                # （暂无插件）
+│   ├── dsh-imagegen/             # 生图（OpenAI Images）
+│   ├── dsh-xai-imagine/          # xAI 生图 / 编辑
+│   ├── dsh-theme-warm/           # 暖色护眼主题
+│   ├── dsh-theme-jintao-retro/   # 复古硬件皮肤主题
+│   ├── dsh-card-printer/         # 离线卡片工作室
+│   └── dsh-watermarker/          # 浏览器本地水印工具
+├── knowledge/
+│   ├── dsh-notebook/             # 笔记本
+│   ├── dsh-agenda/               # 议程管理
+│   ├── dsh-projects/             # 项目管理
+│   ├── dsh-areas/                # 领域管理
+│   ├── dsh-resources/            # 资源管理
+│   ├── dsh-bookmarks/            # 书签管理
+│   └── dsh-knowledge-archives/   # 知识归档
 └── service/
-    ├── dsh-github/           # GitHub 集成
-    ├── dsh-mcp-panel/        # MCP 服务器面板
-    └── dsh-restart-web/      # 重启 Web 服务
+    ├── dsh-github/               # GitHub 集成
+    ├── dsh-mcp-panel/            # MCP 服务器面板
+    ├── dsh-restart-web/          # 重启 Web 服务
+    ├── dsh-video/                # 视频内嵌播放
+    └── dsh-file-drawer/          # 文件管理面板抽屉
 ```
 
 ---

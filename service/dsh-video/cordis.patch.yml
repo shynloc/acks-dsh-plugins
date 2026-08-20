@@ -1,0 +1,4 @@
+# The production-tested video bundle is enabled by default.
+- insert:
+    - id: dsh-video
+      name: 'dsh-video'

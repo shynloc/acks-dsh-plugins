@@ -1,0 +1,4 @@
+# 文件管理面板抽屉插件：在 DSH 界面右侧添加可展开/收起的文件浏览器
+- insert:
+    - id: dsh-file-drawer
+      name: 'dsh-file-drawer'
